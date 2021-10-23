@@ -7,9 +7,9 @@ body {
   font-size: 20px;
   line-height: 1.5;
   font-weight: normal;
-  color: $color-default;
-  background-color: $body-background;
-  @extend %rubik-400;
+  color: $dark;
+  background-color: $silver-100;
+  font-family: Rubik, sans-serif;
   display: flex;
   flex-direction: column;
 }
