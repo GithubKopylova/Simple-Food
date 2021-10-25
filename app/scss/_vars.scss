@@ -50,3 +50,20 @@ $accent-background:         #FF7A50;
     background-color: $accent-background-light;
   }
 }
+
+.status-dots {
+
+  &:focus {
+    border-color: $orange-900;
+  }
+
+  &:hover {
+    background-color: #FFF2ED;
+    border-color: #FFAE94;
+  }
+
+  &:active {
+    background-color: #FFF2ED;
+    border-color: transparent;
+  }
+} 

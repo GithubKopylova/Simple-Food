@@ -2,6 +2,7 @@
 @import 'fonts';
 @import 'reset';
 @import 'libs';
+@import 'mixins';
 @import 'global';
 
 .header {
@@ -17,6 +18,13 @@
   display: flex;
   font-size: 18px;
   line-height: 1.3;
+  align-items: center;
+  
+  &__list {
+    display: flex;
+    margin-right: 50px;
+  }
+
   &__item:not(:last-child) {
     margin-right: 45px;
   }
@@ -32,41 +40,36 @@
   &__svg {
     width: 24px;
     height: 24px;
-  fill: none;
-  stroke: $darkBlue-900;
-}
+    fill: none;
+    stroke: $darkBlue-900;
+    transition: stroke 0.4s;
+  }
 
   &__link:not(:last-child) {
-    margin-right: 33px;
+    margin-right: 13px;
   }
 
   &__link {
     padding: 7px 10px;
     @extend .status-icon;
-
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    path, ellipse {
-          transition: stroke 0.4s;
-    }
-
-    &:hover path,
-    &:hover ellipse {
-          stroke: #ffffff;
-    }
-
-    &:active path,
-    &:active ellipse {
-    stroke: $dark;
   }
-}
 
   &__link:hover &__num {
     color: $dark;
     background-color: #ffffff;
+  }
+
+    &__link:hover &__svg {
+    stroke: white;
+  }
+
+    &__link:active &__num {
+    color: #ffffff;
+    background-color: $orange-900;
+  }
+
+    &__link:active &__svg {
+    stroke: $dark;
   }
 
   &__num {
@@ -91,6 +94,14 @@
   transition: box-shadow 0.4s, opacity 0.4s;
   outline: 0;
   border-radius: 5px;
+  width: 200px;
+  height: 39px;
+
+// Не могу понять почему не работает object-fit. Ширина ыфиксируется, а высота нет. 
+
+  &__img {
+    object-fit: contain;
+  }
 
   &:focus {
     box-shadow: 0 0 0 2px $focus-color; 
@@ -153,21 +164,26 @@
   }
 
   &__title, &__title-text {
+    display: block;
+    font-style: normal;
     font-weight: 700;
     font-size: 66px;
     line-height: 1.3;
     color: $darkBlue-900;
     text-transform: uppercase;
+    @include line-clamp(66, 1.3, 3);
   }
 
   &__title-text {
     color: $orange-900;
     margin-bottom: 20px;
+    @include line-clamp(66, 1.3, 2);
   }
 
   &__text {
     color: $dark;
     margin-bottom: 20px;
+    @include line-clamp(20, 1.5, 4);
   }
 
   &__content-right {
@@ -200,8 +216,8 @@
     column-gap: 30px;
     row-gap: 30px;
     margin-bottom: 60px;
-    }
   }
+}
 
 .title {
   font-weight: 600;
@@ -210,10 +226,10 @@
   color: $darkBlue-900;
   text-align: center;
 
-    &--popular-categories {
-      margin-bottom: 60px;
-    }
+  &--popular-categories {
+    margin-bottom: 60px;
   }
+}
 
 .filter {
   display: flex;
@@ -225,7 +241,9 @@
     margin-right: 20px;
   }
 
-  &__btn svg {
+  &__svg {
+    width: 44px;
+    height: 44px;
     margin-right: 10px;
   }
 
@@ -248,16 +266,18 @@
   border-color: $orange-900;
   color: $orange-900;
   background-color: $accent-background-light;
-  path {
+  .filter__svg {
     fill: $orange-900;
-  }}
+    }
+  }
 
   &:hover:active {
-    box-shadow: inset 0px -5px 12px rgba(255, 104, 56, 0.2);
+    box-shadow: inset 0 -5px 12px rgba(255, 104, 56, 0.2);
     color: $dark;
-  path {
+  .filter__svg {
     fill: $dark;
-  }}
+      } 
+    }
   }
 }
 
@@ -290,6 +310,7 @@
   color: dark;
   text-align: center;
   margin-bottom: 10px;
+  @include line-clamp(15, 1.2, 2);
   }
 
   &__price {
@@ -304,7 +325,7 @@
   background-color: $orange-900;
   border-color: $orange-900;
   color: #ffffff;
-  path {
+  .filter__svg {
   fill: #ffffff;
   }
 }
@@ -314,20 +335,25 @@
   margin: 120px 0;
 
   .title--stay-home {
+    padding-top: 60px;
     text-align: left;
     margin-bottom: 30px;
   }
 
   &__inner {
     display: flex;
-    align-items: center;
-    justify-items: center;
+    justify-content: center;
+    margin: 0 70px;
+  }
+
+  &__right {
+    max-width: 470px;
+    width: 100%;
   }
 
   &__text {
+    @include line-clamp(20, 1.5, 3);
     margin-bottom: 30px;
-    max-width: 470px;
-    width: 100%;
   }
 
   &__left {
@@ -343,6 +369,9 @@
   &__item {
   display: flex;
   align-items: center;
+  font-size: 24px;
+  line-height: 1.5;
+
 
   &:not(:last-child) {
     margin-bottom: 20px;
@@ -367,9 +396,6 @@
       fill: #FF2222;
     }
   }
-
-
-
 }
 
 .restaurants {
@@ -383,6 +409,14 @@
     grid-template-columns: repeat(3, 1fr);
     column-gap: 30px;
     row-gap: 30px;
+  }
+
+  &__item {
+    transition: box-shadow 0.4s;
+
+  &:hover {
+    box-shadow: 0px 3px 15px rgba(255, 104, 56, 0.5);
+    }
   }
 
   &__info {
@@ -412,6 +446,7 @@
     padding-left: 32px;
     position: relative;
     font-weight: 300;
+
     &::before {
     content: "";
     position: absolute;
@@ -426,14 +461,48 @@
   }
 
   &__link {
-    padding: 5px 28px;
+    padding: 4px 28px;
     border-radius: 20px;
     height: 33px;
-    background-color: $orange-900; 
+    background-color: $orange-900;
+    border: 2px solid transparent;
+    transition: border-color 0.4s, box-shadow 0.4s, background-color 0.4s, padding 0.4s;
+
+    &:focus {
+      border-color: $orange-900;
+      box-shadow: 0 0 0 2px rgba(255, 104, 56, 0.7);
+      background-color: #FFF2ED;
+      .restaurants__svg {
+        fill: $orange-900;
+      }
+    }
+
+    &:hover {
+      border-color: $orange-900;
+      background-color: #ffffff;
+      padding: 4px 7px 5px 48px;
+      .restaurants__svg {
+        fill: $orange-900;
+      }
+    }
+    
+    &:active {
+      border-color: transparent;
+      background-color: #FFF2ED;;
+      padding: 4px 28px;
+      .restaurants__svg {
+        fill: $orange-900;
+      }
+    }
+  }
+
+  &__svg {
+    width: 24px;
+    height: 24px;
+    fill: #ffffff;
+    transition: fill 0.4s;
   }
 }
-
-
 
 .footer {
   padding-top: 120px;
@@ -451,9 +520,18 @@
     margin-bottom: 12px;
   }
 
-  &__list,  &__item{
+  &__list {
+    column-count: 3;
+    column-gap: 70px;
+    font-size: 18px;
+    line-height: 1.3;
     margin-right: 70px;
     letter-spacing: 0.01em;
+  }
+
+    &__item {
+    letter-spacing: 0.01em;
+    margin-right: 70px;
   }
 
   &__list-item:not(:last-child) {
@@ -477,20 +555,25 @@
     padding: 13px 36px;
     position: relative;
 
-  svg {
+  .button__svg {
     margin-right: 15px;
+    width: 16px;
+    height: 16px;
+    fill: #ffffff;
+    }
   }
-}
 
   &--btn:focus {
-  path {
+  .button__svg  {
     fill: $orange-900;
-  }}
+    }
+  }
 
   &--btn:hover {
-  path {
+  .button__svg {
     fill: $orange-900;
-  }}
+    }
+  }
 
   &__bottom {
     display: flex;
@@ -507,6 +590,7 @@
 .contact {
   font-size: 16px;
   line-height: 2;
+  font-style: normal;
   &__list {
     margin-bottom: 15px;
   }
@@ -532,42 +616,52 @@
 .cocial {
   display: flex;
   justify-content: flex-start;
+
   &__item:not(:last-child){
     margin-right: 13px;
   }
+
   &__link {
     display: block;
-    background-repeat: no-repeat;
-    background-size: contain;
+    background-color: $silver-200;
     width: 39px;
     height: 39px;
     outline: 0;
-    transition: border-radius 0.4s, box-shadow 0.4s;
-    path, circle {
-      transition: fill 0.4s;
-    }
+    border: 1px solid transparent; 
+    border-radius: 50%;
+    transition: border-radius 0.4s, box-shadow 0.4s, background-color 0.4s;
+    position: relative;
   }
+
+  &__svg {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 22%;
+    left: 23%;
+    transition: fill 0.4s;
+  }
+
   &__link:hover {
-    path {
+    background-color: $orange-900;
+    .cocial__svg {
       fill: #ffffff;
     }
-    circle {
-      fill: $orange-900;
-    }
   }
+
   &__link:focus {
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px $focus-color;
-    circle {
-    fill: $accent-background-light;
+    border-color: $orange-900;
+    background-color: #FFF2ED;
+    box-shadow: 0 0 0 2px rgba(255, 104, 56, 0.7);
+    .cocial__svg {
+      fill: #000000;
     }
   }
+
   &__link:active {
-    path {
+    background-color: #FFF2ED;
+    .cocial__svg {
       fill: $orange-900;
-    }
-    circle {
-      fill: $accent-background-light;
     }
   }
 }
@@ -577,6 +671,11 @@
 
   &--title{
     margin-bottom: 45px;
+  }
+
+  &__item-slider {
+    margin: 0 90px;
+    margin-bottom: 48px;
   }
 
   &__item-content {
@@ -598,6 +697,7 @@
 
   &__text {
     margin-bottom: 30px;
+    @include line-clamp(20, 1.5, 5);
 
     &::after {
     content: "";
@@ -640,8 +740,8 @@
 
   .slick-arrow {
     font-size: 0;
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     border: 3px solid $gray;
     background-color: transparent;
     border-radius: 50%;
@@ -649,9 +749,11 @@
   }
 
   .slick-prev {
-    top: 312px;
+    top: 350px;
     left: 38%;
     transform: translateX(30px);
+    transition: border-color 0.4s, background-color 0.4s;
+    @extend .status-dots;
     &::before {
       content: "";
       background-image: url(../images/icons/arrow-slider.svg);
@@ -660,15 +762,17 @@
       position: absolute;
       width: 19px;
       height: 19px;
-      top: 5px;
-      left: 7px;
+      top: 8px;
+      left: 11px;
     }
   }
 
   .slick-next {
-    top: 312px;
+    top: 350px;
     left: 54%;
     transform: translateX(30px);
+    transition: border-color 0.4s, background-color 0.4s;
+    @extend .status-dots;
     &::before {
       content: "";
       background-image: url(../images/icons/arrow-slider.svg);
@@ -677,11 +781,12 @@
       position: absolute;
       width: 19px;
       height: 19px;
-      top: 5px;
-      left: 2px;
+      top: 8px;
+      left: 5px;
       transform: rotate(180deg);
     }
   }
+
 
   .slick-dots {
     display: flex;
@@ -700,16 +805,16 @@
         border-radius: 50%;
         border-color: $gray;
         border: 1px solid transparent;
-        
       }
 
     &.slick-active {
       button {
+        @extend .status-dots;
+        transition: border-color 0.4s, background-color 0.4s;
         background-color: $orange-900;
+        }
       }
     }
-    
-  }
   }
 }
 
@@ -721,14 +826,20 @@
     align-items: center;
   }
 
+  &__right {
+    margin-right: 60px;
+  }
+
   .title--mobile-app {
     text-align: left;
     margin-bottom: 45px;
+    max-width: 540px;
   }
 
   &__text {
     margin-bottom: 30px;
     max-width: 530px;
+    @include line-clamp(20, 1.5, 3);
   }
 
   &__list {
@@ -756,8 +867,6 @@
     }
   }
 }
-
-
 
 
 
