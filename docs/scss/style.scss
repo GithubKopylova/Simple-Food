@@ -94,10 +94,6 @@
   transition: box-shadow 0.4s, opacity 0.4s;
   outline: 0;
   border-radius: 5px;
-  width: 200px;
-  height: 39px;
-
-// Не могу понять почему не работает object-fit. Ширина ыфиксируется, а высота нет. 
 
   &__img {
     object-fit: contain;
@@ -423,7 +419,6 @@
 
   &__img {
     object-fit: fill;
-    height: 300px;
   }
 
   &__info {
