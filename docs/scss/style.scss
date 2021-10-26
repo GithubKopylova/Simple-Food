@@ -101,6 +101,7 @@
 
   &__img {
     object-fit: contain;
+    height: 100%;
   }
 
   &:focus {
@@ -300,6 +301,7 @@
 
   &__img {
   margin-bottom: 10px;
+  object-fit: contain;
   }
 
   &__title {
@@ -417,6 +419,11 @@
   &:hover {
     box-shadow: 0px 3px 15px rgba(255, 104, 56, 0.5);
     }
+  }
+
+  &__img {
+    object-fit: fill;
+    height: 300px;
   }
 
   &__info {
@@ -590,7 +597,7 @@
   &__bottom {
     display: flex;
   }
-  
+
   &__text {
     padding: 30px 0;
     display: block;
