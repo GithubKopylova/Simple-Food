@@ -713,6 +713,7 @@
   &__author {
     border-radius: 50%;
     margin-right: 40px;
+    object-fit: cover;
   }
 
   &__text {
@@ -886,6 +887,11 @@
       width: 135px;
     }
   }
+
+  &__img {
+    object-fit: cover;
+  }
+
 }
 
 
